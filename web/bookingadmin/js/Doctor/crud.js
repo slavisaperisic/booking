@@ -1,15 +1,17 @@
 /**
  * handle form submit
  */
-initiateDropzone("#doctor_image");
+initiateDropzoneGallery("#doctor_image", null);
 
 $(document).on("click", ".save_doctor", function () {
 
     var doctorObject = {
         fullname: $("#doctor_firstname").val() + " " + $("#doctor_lastname").val(),
         title: $("#doctor_title").val(),
-        image: activeImage
+        images: galleryImages
     };
+
+    console.log(doctorObject);
 
     var doctor = JSON.stringify(doctorObject);
 

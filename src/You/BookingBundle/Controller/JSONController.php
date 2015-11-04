@@ -3,13 +3,14 @@
 namespace You\BookingBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializationContext;
 use You\BookingBundle\Entity\Uploader;
-use Doctrine\Common\Util\Debug;
 use You\BookingBundle\Entity\Service;
 
 /**
@@ -58,7 +59,9 @@ class JSONController extends Controller
         $doctorManager = $this->container->get("youbookingbundle.doctor_manager");
         $doctorClassObject = $this->serializer->deserialize($request->getContent(), "You\BookingBundle\Entity\Doctor", "json");
 
-        if ($doctorClassObject->getImage() != "")
+        Debug::dump($doctorClassObject->getImages());exit;
+
+        if ($doctorClassObject->getImages() != "")
             $this->uploader->uploadBase64File($doctorClassObject->getImage());
 
         $doctorManager->saveDoctor($doctorClassObject);
@@ -89,7 +92,7 @@ class JSONController extends Controller
 
         $serviceManager->saveService($serviceClassObject);
 
-        $serviceResponse = $this->serializer->serialize($serviceClassObject, "json");
+        $serviceResponse = $this->serializer->serialize($serviceClassObject, 'json', SerializationContext::create()->setGroups(array('just-service')));
         return new Response($serviceResponse);
     }
 

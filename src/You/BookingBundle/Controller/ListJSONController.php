@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JMS\Serializer\SerializationContext;
 
 /**
  * @Route("/json/list")
@@ -72,7 +73,7 @@ class ListJSONController extends Controller
 
         $categories = $categoryManager->findAllCategories();
 
-        $categoriesJSON = $this->serializer->serialize($categories, "json");
+        $categoriesJSON = $this->serializer->serialize($categories, 'json', SerializationContext::create()->setGroups(array('list-category')));
 
         $response = new Response($categoriesJSON);
         $response->headers->set('Content-Type', 'application/json');

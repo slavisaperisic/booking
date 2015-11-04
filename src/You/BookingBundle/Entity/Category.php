@@ -22,6 +22,7 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMS\Groups({"list-category"})
      */
     private $id;
 
@@ -29,6 +30,7 @@ class Category
      * @var string
      * @JMS\Type("string")
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @JMS\Groups({"list-category"})
      */
     private $name;
 
@@ -105,8 +107,6 @@ class Category
     {
         $this->parent = $parent;
     }
-
-
 
     /**
      * @param Service $service

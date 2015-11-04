@@ -39,6 +39,11 @@ class Image
     private $base64Content = null;
 
     /**
+     * @ORM\OneToMany(targetEntity="Doctor", mappedBy="images")
+     **/
+    private $doctor;
+
+    /**
      * Image constructor.
      * @param $name
      * @param string $base64Content
@@ -47,6 +52,22 @@ class Image
     {
         $this->name = $name;
         $this->base64Content = $base64Content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDoctor()
+    {
+        return $this->doctor;
+    }
+
+    /**
+     * @param mixed $doctor
+     */
+    public function setDoctor($doctor)
+    {
+        $this->doctor = $doctor;
     }
 
     /**

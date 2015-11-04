@@ -28,6 +28,7 @@ class Service
      * @var string
      * @JMS\Type("string")
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
+     * @JMS\Groups({"just-service"})
      */
     private $description;
 
@@ -35,6 +36,7 @@ class Service
      * @var string
      * @JMS\Type("string")
      * @ORM\Column(name="name", type="string", length=50)
+     * @JMS\Groups({"just-service"})
      */
     private $name;
 
@@ -51,7 +53,7 @@ class Service
     /**
      * @JMS\Type("ArrayCollection<You\BookingBundle\Entity\Category>")
      * @ORM\ManyToMany(targetEntity="Category", mappedBy="services")
-     * @JMS\Exclude
+     *
      **/
     private $categories;
 

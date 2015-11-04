@@ -47,10 +47,11 @@ class Doctor
     private $clinics;
 
     /**
-     * @ORM\OneToOne(targetEntity="You\BookingBundle\Entity\Image", cascade={"all"})
      * @JMS\Type("You\BookingBundle\Entity\Image")
+     * @ORM\ManyToOne(targetEntity="Image", inversedBy="doctor")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      **/
-    private $image;
+    private $images;
 
     /**
      * @ORM\OneToOne(targetEntity="Profile", mappedBy="doctor")
@@ -80,17 +81,17 @@ class Doctor
     /**
      * @return mixed
      */
-    public function getImage()
+    public function getImages()
     {
-        return $this->image;
+        return $this->images;
     }
 
     /**
-     * @param mixed $image
+     * @param mixed $images
      */
-    public function setImage($image)
+    public function setImages($images)
     {
-        $this->image = $image;
+        $this->images = $images;
     }
 
     /**
