@@ -1,0 +1,12 @@
+services:
+  youbookingbundle.doctor_repository:
+    class: You\BookingBundle\Repository\DoctorRepository
+    factory_service: doctrine.orm.default_entity_manager
+    factory_method: getRepository
+    arguments:
+      - You\BookingBundle\Entity\Doctor
+
+  youbookingbundle.doctor_manager:
+    class: You\BookingBundle\Manager\DoctorManager
+    arguments:
+      repository: "@youbookingbundle.doctor_repository"

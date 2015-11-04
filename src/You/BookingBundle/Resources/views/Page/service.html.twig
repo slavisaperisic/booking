@@ -1,0 +1,63 @@
+{% extends '@templatedir/Default/working-master.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bookingadmin/css/dropzone.css") }}">
+{% endblock %}
+
+{% block thecontent %}
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <form role="form">
+
+                <div class="form-group">
+                    <label for="service_name">Service Name</label>
+                    <input id="service_name" class="form-control" placeholder="service Name">
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="service_description">Description</label>
+                    <textarea id="service_description" placeholder="Description" class="form-control"></textarea>
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="service_categories">Category</label>
+                    <select multiple id="service_categories" class="form-control">
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="save_service btn btn-default">Save Service</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+                <!-- Drop Zone -->
+                <h5>{% trans %}Upload image {% endtrans %}</h5>
+                <form action="#" class="upload-drop-zone dropzone" id="service_image"></form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone-global.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/Service/crud.js") }}"></script>
+    <script type="text/javascript">
+        initiateDropzone("#service_image");
+    </script>
+{% endblock %}

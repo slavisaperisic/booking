@@ -1,0 +1,49 @@
+{% extends '@templatedir/Default/working-master.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bookingadmin/css/dropzone.css") }}">
+{% endblock %}
+
+{% block thecontent %}
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <form role="form">
+
+                <div class="form-group">
+                    <label for="category_name">Category Name</label>
+                    <input id="category_name" class="form-control" placeholder="Category Name">
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="category_parents">Parent</label>
+                    <select multiple id="category_parents" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="save_category btn btn-default">Save Category</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone-global.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/Category/crud.js") }}"></script>
+    <script type="text/javascript">
+        initiateDropzone("#category_image");
+    </script>
+{% endblock %}

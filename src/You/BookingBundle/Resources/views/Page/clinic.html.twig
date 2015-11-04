@@ -1,0 +1,65 @@
+{% extends '@templatedir/Default/working-master.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bookingadmin/css/dropzone.css") }}">
+{% endblock %}
+
+{% block thecontent %}
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <form role="form">
+
+                <div class="form-group">
+                    <label for="clinic_name">Clinic Name</label>
+                    <input id="clinic_name" class="form-control" placeholder="Clinic Name">
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="clinic_desc">Description</label>
+                    <textarea id="clinic_desc" placeholder="Something about your clinic" class="form-control"></textarea>
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+                {% if edit is defined %}
+                    <div class="form-group">
+                        <button type="button" class="edit_clinic btn btn-default">Edit Clinic</button>
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <button type="button" class="save_clinic btn btn-default">Save Clinic</button>
+                    </div>
+                {% endif %}
+
+            </form>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+
+                <!-- Drop Zone -->
+                <h5>{% trans %}Upload image {% endtrans %}</h5>
+                <form action="#" class="upload-drop-zone dropzone" id="clinic_image"></form>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone-global.js") }}"></script>
+    {% if edit is defined %}
+        <script>var twigEdit = true;var twigId = {{ id }};</script>
+        <script type="text/javascript" src="{{ asset("bookingadmin/js/Clinic/edit.js") }}"></script>
+    {% else %}
+        <script type="text/javascript" src="{{ asset("bookingadmin/js/Clinic/save.js") }}"></script>
+    {% endif %}
+{% endblock %}

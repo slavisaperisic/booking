@@ -1,0 +1,64 @@
+{% extends '@templatedir/Default/working-master.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bookingadmin/css/dropzone.css") }}">
+{% endblock %}
+
+{% block thecontent %}
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <form role="form">
+
+                <div class="form-group">
+                    <label for="doctor_firstname">First Name</label>
+                    <input id="doctor_firstname" class="form-control" placeholder="First Name">
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor_lastname">Last Name</label>
+                    <input id="doctor_lastname" class="form-control" placeholder="Last Name">
+
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor_title">Title</label>
+                    <select id="doctor_title" class="form-control">
+                        <option>Hirurg</option>
+                        <option>Gastro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="save_doctor btn btn-default">Save Doctor</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="form-group">
+
+                <!-- Drop Zone -->
+                <h5>{% trans %}Upload image {% endtrans %}</h5>
+
+                <form action="#" class="upload-drop-zone dropzone" id="doctor_image"></form>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/dropzone-global.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bookingadmin/js/Doctor/crud.js") }}"></script>
+{% endblock %}
