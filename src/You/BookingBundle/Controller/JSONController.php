@@ -12,6 +12,7 @@ use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializationContext;
 use You\BookingBundle\Entity\Uploader;
 use You\BookingBundle\Entity\Service;
+use You\BookingBundle\Entity\Image;
 
 /**
  * @Route("/json")
@@ -59,11 +60,20 @@ class JSONController extends Controller
         $doctorManager = $this->container->get("youbookingbundle.doctor_manager");
         $doctorClassObject = $this->serializer->deserialize($request->getContent(), "You\BookingBundle\Entity\Doctor", "json");
 
-        Debug::dump($doctorClassObject->getImages());exit;
+        //Debug::dump($doctorClassObject->getImages());exit;
 
-        if ($doctorClassObject->getImages() != "")
-            $this->uploader->uploadBase64File($doctorClassObject->getImage());
+        $imagesToUpload = $doctorClassObject->getImages();
+        $doctorClassObject->removeImages();
 
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($imagesToUpload as $image) {
+            $this->uploader->uploadBase64File($image);
+            $image->setDoctor($doctorClassObject);
+            $em->persist($image);
+        }
+
+        //$doctorClassObject->setImages($newCollection);
         $doctorManager->saveDoctor($doctorClassObject);
 
         $doctorResponse = $this->serializer->serialize($doctorClassObject, "json");

@@ -47,9 +47,8 @@ class Doctor
     private $clinics;
 
     /**
-     * @JMS\Type("You\BookingBundle\Entity\Image")
-     * @ORM\ManyToOne(targetEntity="Image", inversedBy="doctor")
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @JMS\Type("ArrayCollection<You\BookingBundle\Entity\Image>")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="doctor")
      **/
     private $images;
 
@@ -60,6 +59,7 @@ class Doctor
 
     public function __construct() {
         $this->clinics = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -87,11 +87,39 @@ class Doctor
     }
 
     /**
-     * @param mixed $images
+     * @param $images
+     * @return $this
      */
     public function setImages($images)
     {
         $this->images = $images;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function removeImages()
+    {
+        $this->images = null;
+    }
+
+    /**
+     * @param Image $image
+     */
+    public function addImage(Image $image)
+    {
+        $this->images[] = $image;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param Image $image
+     */
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
     }
 
     /**

@@ -39,7 +39,9 @@ class Image
     private $base64Content = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Doctor", mappedBy="images")
+     * @JMS\Type("You\BookingBundle\Entity\Doctor")
+     * @ORM\ManyToOne(targetEntity="Doctor", inversedBy="images")
+     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id")
      **/
     private $doctor;
 
