@@ -3,6 +3,7 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: booking
+    database_name2: booking_company
     database_user: root
     database_password: elefant11
     mailer_transport: smtp

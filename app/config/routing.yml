@@ -1,7 +1,7 @@
-you_booking:
-    resource: "@YouBookingBundle/Resources/config/routing.yml"
-    prefix:   /
-
 app:
     resource: "@YouBookingBundle/Controller/"
+    type:     annotation
+
+company_routing:
+    resource: "@CerseiLabsCompanyBundle/Controller/"
     type:     annotation

@@ -55,9 +55,20 @@ class Category
      **/
     private $parent;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->children = new ArrayCollection();
         $this->services = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -152,13 +163,5 @@ class Category
         return $this->name;
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
 }

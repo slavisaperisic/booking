@@ -3,3 +3,4 @@ app/logs/*
 app/bootstrap.php.cache
 .idea/*
 uploads/*
+vendor/
