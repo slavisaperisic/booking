@@ -2,6 +2,7 @@
 
 namespace CerseiLabs\CompanyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,28 +52,23 @@ class Service
     private $priceInLetters;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Payment", inversedBy="services")
-     * @ORM\JoinColumn(name="payment_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Invoice", mappedBy="services")
      **/
-    private $payment;
+    private $invoices;
 
     /**
-     * Service constructor.
-     * @param int $id
-     * @param string $name
-     * @param string $category
-     * @param string $price
-     * @param string $priceInLetters
-     * @param $payment
+     * @param $name
+     * @param $category
+     * @param $price
+     * @param $priceInLetters
      */
-    public function __construct($id, $name, $category, $price, $priceInLetters, $payment)
+    public function __construct($name, $category, $price, $priceInLetters)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->category = $category;
         $this->price = $price;
         $this->priceInLetters = $priceInLetters;
-        $this->payment = $payment;
+        $this->invoices = new ArrayCollection();
     }
 
     /**
@@ -158,17 +154,17 @@ class Service
     /**
      * @return mixed
      */
-    public function getPayment()
+    public function getInvoices()
     {
-        return $this->payment;
+        return $this->invoices;
     }
 
     /**
-     * @param mixed $payment
+     * @param mixed $invoices
      */
-    public function setPayment($payment)
+    public function setInvoices($invoices)
     {
-        $this->payment = $payment;
+        $this->invoices = $invoices;
     }
 
 }

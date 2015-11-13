@@ -33,14 +33,9 @@ class Address
      **/
     private $company;
 
-    /**
-     * @param $street
-     * @param $company
-     */
-    public function __construct($street, $company)
+    public function __construct($street)
     {
         $this->street = $street;
-        $this->company = $company;
     }
 
     /**

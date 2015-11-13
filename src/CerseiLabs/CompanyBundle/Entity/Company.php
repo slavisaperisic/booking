@@ -64,14 +64,14 @@ class Company
     private $companyEmail;
 
     /**
-     * @ORM\OneToMany(targetEntity="Payment", mappedBy="owningCompanies")
+     * @ORM\OneToOne(targetEntity="Invoice", mappedBy="owningCompany")
      **/
-    private $paymentForOwningCompany;
+    private $invoiceForOwningCompany;
 
     /**
-     * @ORM\OneToMany(targetEntity="Payment", mappedBy="payingCompanies")
+     * @ORM\OneToOne(targetEntity="Invoice", mappedBy="payingCompany")
      **/
-    private $paymentForPayingCompany;
+    private $invoiceForPayingCompany;
 
     /**
      * Company constructor.
@@ -81,10 +81,8 @@ class Company
      * @param int $personalNumber
      * @param int $industryCode
      * @param string $companyEmail
-     * @param $paymentForOwningCompany
-     * @param $paymentForPayingCompany
      */
-    public function __construct($companyName, $addresses, $PIB, $personalNumber, $industryCode, $companyEmail, $paymentForOwningCompany, $paymentForPayingCompany)
+    public function __construct($companyName, $addresses, $PIB, $personalNumber, $industryCode, $companyEmail)
     {
         $this->companyName = $companyName;
         $this->addresses = $addresses;
@@ -92,9 +90,152 @@ class Company
         $this->personalNumber = $personalNumber;
         $this->industryCode = $industryCode;
         $this->companyEmail = $companyEmail;
-        $this->paymentForOwningCompany = $paymentForOwningCompany;
-        $this->paymentForPayingCompany = $paymentForPayingCompany;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * @param string $companyName
+     */
+    public function setCompanyName($companyName)
+    {
+        $this->companyName = $companyName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * @param mixed $addresses
+     */
+    public function setAddresses($addresses)
+    {
+        $this->addresses = $addresses;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPIB()
+    {
+        return $this->PIB;
+    }
+
+    /**
+     * @param int $PIB
+     */
+    public function setPIB($PIB)
+    {
+        $this->PIB = $PIB;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPersonalNumber()
+    {
+        return $this->personalNumber;
+    }
+
+    /**
+     * @param int $personalNumber
+     */
+    public function setPersonalNumber($personalNumber)
+    {
+        $this->personalNumber = $personalNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIndustryCode()
+    {
+        return $this->industryCode;
+    }
+
+    /**
+     * @param int $industryCode
+     */
+    public function setIndustryCode($industryCode)
+    {
+        $this->industryCode = $industryCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompanyEmail()
+    {
+        return $this->companyEmail;
+    }
+
+    /**
+     * @param string $companyEmail
+     */
+    public function setCompanyEmail($companyEmail)
+    {
+        $this->companyEmail = $companyEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInvoiceForOwningCompany()
+    {
+        return $this->invoiceForOwningCompany;
+    }
+
+    /**
+     * @param mixed $invoiceForOwningCompany
+     */
+    public function setInvoiceForOwningCompany($invoiceForOwningCompany)
+    {
+        $this->invoiceForOwningCompany = $invoiceForOwningCompany;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInvoiceForPayingCompany()
+    {
+        return $this->invoiceForPayingCompany;
+    }
+
+    /**
+     * @param mixed $invoiceForPayingCompany
+     */
+    public function setInvoiceForPayingCompany($invoiceForPayingCompany)
+    {
+        $this->invoiceForPayingCompany = $invoiceForPayingCompany;
+    }
+
 
 
 }
