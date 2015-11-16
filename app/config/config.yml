@@ -41,6 +41,7 @@ twig:
     strict_variables: "%kernel.debug%"
     paths:
         "%kernel.root_dir%/../src/You/BookingBundle/Resources/views": templatedir
+        "%kernel.root_dir%/../src/CerseiLabs/CompanyBundle/Resources/views": cerseilabstemplatedir
 
 
 # Assetic Configuration
