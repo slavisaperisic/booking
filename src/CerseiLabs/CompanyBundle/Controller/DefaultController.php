@@ -71,4 +71,12 @@ class DefaultController extends Controller
         return $this->render("@cerseilabstemplatedir/List/invoices.html.twig");
     }
 
+    /**
+     * @Route("/task-management", name="task_management")
+     */
+    public function newTaskAction()
+    {
+        return $this->render("@cerseilabstemplatedir/Page/task.html.twig");
+    }
+
 }

@@ -16,11 +16,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class DefaultController
- * @package You\BookingBundle\Controller
+ * @package CerseiLabs\CompanyBundle\Controller
  * @Route("/invoice")
  */
 class CompanyController extends Controller
 {
+
+    private $serializer;
+
+    /**
+     * JSONController constructor.
+     */
+    public function __construct()
+    {
+        $this->serializer = SerializerBuilder::create()->build();
+    }
 
     /**
      * @Route("/add_new_address", name="add_new_address")
@@ -101,6 +111,54 @@ class CompanyController extends Controller
         $em->flush();
 
         return new Response(200);
+    }
+
+    /**
+     * @Route("/json/insert/task", name="json_insert_task")
+     * @param Request $request
+     * @return Response
+     */
+    public function insertTaskAction(Request $request)
+    {
+
+
+        $taskClassObject = $this->serializer->deserialize($request->getContent(), "CerseiLabs\CompanyBundle\Entity\Task", "json");
+
+        $this->getDoctrine()->getEntityManager("company")->persist($taskClassObject);
+        $this->getDoctrine()->getEntityManager("company")->flush();
+
+        $tasks = $this->getDoctrine()->getManager("company")->getRepository("CerseiLabsCompanyBundle:Task")->findBy([], ['id' => 'DESC']);
+
+        $tasksResponse = $this->serializer->serialize($tasks, "json");
+        return new Response($tasksResponse);
+    }
+
+    /**
+     * @Route("/json/list/task", name="json_list_task")
+     * @return Response
+     */
+    public function listTaskAction()
+    {
+
+        $tasks = $this->getDoctrine()->getManager("company")->getRepository("CerseiLabsCompanyBundle:Task")->findBy([], ['id' => 'DESC']);
+
+        $taskResponse = $this->serializer->serialize($tasks, "json");
+        return new Response($taskResponse);
+    }
+
+    /**
+     * @Route("/json/edit/task/{taskid}", name="json_edit_task")
+     * @return Response
+     */
+    public function editTaskAction($taskid)
+    {
+
+        $taskToEdit = $this->getDoctrine()->getManager("company")->getRepository("CerseiLabsCompanyBundle:Task")->findOneById($taskid);
+        $taskToEdit->setStatus(1);
+        $this->getDoctrine()->getEntityManager("company")->flush();
+
+        $taskResponse = $this->serializer->serialize($taskToEdit, "json");
+        return new Response($taskResponse);
     }
 
 }

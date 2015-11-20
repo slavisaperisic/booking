@@ -5,13 +5,10 @@
  */
 
 /* Global Styles */
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,300,500,700);
-
 body {
     margin-top: 100px;
     background-color: #E2ECF1;
-    font-family: Roboto;
+    font-family: helvetica, arial, sans-serif;
 }
 
 @media(min-width:768px) {
@@ -41,7 +38,7 @@ body {
     }
 
     #page-wrapper {
-        padding: 10px;
+        padding: 5px;
     }
 }
 
